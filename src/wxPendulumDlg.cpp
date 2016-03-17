@@ -5,6 +5,7 @@
 
 #include "wxPendulumDlg.hpp"
 #include <wx/pen.h>
+#include <wx/dcgraph.h>
 
 IMPLEMENT_APP(wxPendulumDlgApp)
 
@@ -61,7 +62,8 @@ void wxPendulumDlg::OnClose(wxCloseEvent& WXUNUSED(event))
 void wxPendulumDlg::wxPendulumDlgPaint(wxPaintEvent& WXUNUSED(event))
 {
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
-    wxBufferedPaintDC dc(this);
+    wxBufferedPaintDC pdc(this);
+    wxGCDC dc( pdc ) ;
 
     // Get window dimensions
     wxSize sz = GetClientSize();
