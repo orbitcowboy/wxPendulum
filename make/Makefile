@@ -122,6 +122,12 @@ install: build
 	install -d /usr/bin/
 	install ../bin/$(APPLICATION_NAME) /usr/bin/
 
+style:
+	/usr/bin/find $(SOURCE_DIR) -name "*.cpp" -type f -exec astyle --style=ansi -S -N -w -Y -p -C -c {} \;
+	/usr/bin/find $(SOURCE_DIR) -name "*.hpp" -type f -exec astyle --style=ansi -S -N -w -Y -p -C -c {} \;
+	/usr/bin/find $(SOURCE_DIR) -name "*.c"   -type f -exec astyle --style=ansi -S -N -w -Y -p -C -c {} \;
+	/usr/bin/find $(SOURCE_DIR) -name "*.h"   -type f -exec astyle --style=ansi -S -N -w -Y -p -C -c {} \;
+
 depend:
 	@cat < /dev/null > makedep
 	@cat < /dev/null > cmakedep

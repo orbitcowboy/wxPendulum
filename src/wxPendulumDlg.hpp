@@ -31,30 +31,30 @@ class wxPendulumDlg : public wxDialog
 {
     public:
 
-        wxPendulumDlg(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("wxPendulum"), 
-				 const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, 
-				 long style = wxSUNKEN_BORDER | wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX);
+        wxPendulumDlg(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("wxPendulum"),
+                      const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
+                      long style = wxSUNKEN_BORDER | wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX);
 
         virtual ~wxPendulumDlg();
-	
-		// Event handler
+
+        // Event handler
         void wxPendulumDlgPaint(wxPaintEvent& event);
         void wxPendulumDlgSize(wxSizeEvent& event);
         void OnTimer(wxTimerEvent& event);
 
     private:
 
-		// a pointer to a timer object
+        // a pointer to a timer object
         wxTimer *m_timer;
 
-		unsigned int m_uiLength;
-		double  	 m_Angle;
-		double       m_AngleVelocity;
+        unsigned int m_uiLength;
+        wxDouble    m_Angle;
+        wxDouble    m_AngleVelocity;
 
         enum wxIDs
         {
             ID_WXTIMER1 = 1001,
-            ID_DUMMY_VALUE_ 
+            ID_DUMMY_VALUE_
         };
 
         void OnClose(wxCloseEvent& event);

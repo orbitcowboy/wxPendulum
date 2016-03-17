@@ -45,9 +45,9 @@ void wxPendulumDlg::CreateGUIControls()
     SetSize(8, 8, 509, 412);
     Center();
 
-	m_uiLength = 200;
-	m_Angle    = M_PI/2.;
-	m_AngleVelocity = 0;
+    m_uiLength = 200;
+    m_Angle    = M_PI / 2.;
+    m_AngleVelocity = 0;
 
     m_timer = new wxTimer();
     m_timer->SetOwner(this, ID_WXTIMER1);
@@ -67,11 +67,11 @@ void wxPendulumDlg::wxPendulumDlgPaint(wxPaintEvent& WXUNUSED(event))
 
     // Get window dimensions
     wxSize sz = GetClientSize();
-	// determine the center of the canvas
-    const wxPoint center(wxPoint(sz.x / 2, sz.y / 2));
+    // determine the center of the canvas
+    const wxRealPoint center(wxPoint(sz.x / 2.0, sz.y / 2.0));
 
     // create background color
-    wxColour powderblue = wxColour(176,224,230);
+    wxColour powderblue = wxColour(176, 224, 230);
 
     // draw powderblue background
     dc.SetPen(powderblue);
@@ -79,26 +79,25 @@ void wxPendulumDlg::wxPendulumDlgPaint(wxPaintEvent& WXUNUSED(event))
     dc.DrawRectangle(0, 0, sz.x, sz.y);
 
     // draw lines
-	wxPen Pen(*wxBLACK_PEN);
-	Pen.SetWidth(1);
+    wxPen Pen(*wxBLACK_PEN);
+    Pen.SetWidth(1);
     dc.SetPen(Pen);
     dc.SetBrush(*wxBLACK_BRUSH);
 
-    double angleAccel, dt = 0.15;
-
-    angleAccel = (-9.81 / m_uiLength) * sin(m_Angle);
+    const wxDouble dt = 0.15;
+    const wxDouble angleAccel = (-9.81 / m_uiLength) * sin(m_Angle);
     m_AngleVelocity += angleAccel * dt;
     m_Angle += m_AngleVelocity * dt;
 
-    int anchorX = sz.x / 2, anchorY = sz.y / 4;
-    int ballX = anchorX + (int)(sin(m_Angle) * m_uiLength);
-    int ballY = anchorY + (int)(cos(m_Angle) * m_uiLength);
+    const wxDouble anchorX = sz.x / 2.0, anchorY = sz.y / 4.0;
+    const wxDouble ballX = anchorX + (sin(m_Angle) * m_uiLength);
+    const wxDouble ballY = anchorY + (cos(m_Angle) * m_uiLength);
     dc.DrawLine(anchorX, anchorY, ballX, ballY);
 
     dc.SetBrush(*wxGREY_BRUSH);
-    dc.DrawEllipse(anchorX - 3, anchorY - 4, 7, 7);
+    dc.DrawEllipse(anchorX - 3.0, anchorY - 4.0, 7.0, 7.0);
 
-    dc.SetBrush(wxColour(255,255,0)); // yellow
+    dc.SetBrush(wxColour(255, 255, 0)); // yellow
     dc.DrawEllipse(ballX - 7, ballY - 7, 20, 20);
 }
 
@@ -109,6 +108,6 @@ void wxPendulumDlg::wxPendulumDlgSize(wxSizeEvent& WXUNUSED(event))
 
 void wxPendulumDlg::OnTimer(wxTimerEvent& WXUNUSED(event))
 {
-	// force refresh
-	Refresh();
+    // force refresh
+    Refresh();
 }
